@@ -1,0 +1,30 @@
+# Virtual environments
+.venv/
+tts_env/
+
+# Python
+__pycache__/
+*.pyc
+
+# Generated media
+media/temp/
+media/output/
+output/
+
+# Audio & video
+*.wav
+*.mp3
+*.mp4
+
+# AI models
+models/
+
+# Piper binaries
+piper/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
