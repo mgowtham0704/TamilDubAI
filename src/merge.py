@@ -1,27 +1,36 @@
+import logging
 import subprocess
+
+from config import FFMPEG
+
+logger = logging.getLogger(__name__)
 
 
 def merge_video(video_path, audio_path, output_path):
+    """
+    Merge the original video with the generated Tamil audio.
+    """
 
-    subprocess.run([
-        "ffmpeg",
-        "-y",
-        "-i", video_path,
-        "-i", audio_path,
-        "-map", "0:v",
-        "-map", "1:a",
-        "-c:v", "copy",
-        "-c:a", "aac",
-        output_path
-    ], check=True)
+    try:
+        logger.info("Merging video and audio...")
 
-    print("✅ Tamil dubbed video created!")
+        subprocess.run(
+            [
+                FFMPEG,
+                "-y",
+                "-i", str(video_path),
+                "-i", str(audio_path),
+                "-map", "0:v",
+                "-map", "1:a",
+                "-c:v", "copy",
+                "-c:a", "aac",
+                str(output_path),
+            ],
+            check=True,
+        )
 
+        logger.info(f"Dubbed video saved to: {output_path}")
 
-if __name__ == "__main__":
-
-    merge_video(
-        "media/input/video.mp4",
-        "media/temp/final_tamil_audio.mp3",
-        "media/output/tamil_dubbed_final.mp4"
-    )
+    except Exception:
+        logger.exception("Video merging failed.")
+        raise
