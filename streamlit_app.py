@@ -106,7 +106,7 @@ if dub_button:
         with open(output_video, "rb") as file:
             st.download_button(
                 "📥 Download Dubbed Video",
-                date=file,
+                data=file,
                 file_name="tamil_dubbed.mp4",
                 mime="video/mp4",
             )
