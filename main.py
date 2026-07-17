@@ -12,6 +12,7 @@ from src.translator import translate_to_tamil
 from src.text_to_speech import create_tamil_audio
 from src.audio_timeline import create_timeline_audio
 from src.merge import merge_video
+from src.extract_audio import extract_audio
 
 
 logging.basicConfig(
@@ -35,6 +36,10 @@ def dub_video(input_video_path):
     shutil.copy(input_video_path, input_video)
 
     logging.info("Transcribing audio...")
+    extract_audio(
+    str(input_video),
+    str(audio_path)
+)
     segments = transcribe_audio(str(audio_path))
 
     logging.info("Generating Tamil speech...")
