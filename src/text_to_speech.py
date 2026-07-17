@@ -1,37 +1,38 @@
+import logging
 import subprocess
 from pathlib import Path
 
+from config import PIPER_EXE, PIPER_MODEL
 
-# Project root directory
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
-# Piper executable
-PIPER_EXE = PROJECT_ROOT / "piper" / "piper.exe"
-
-# Tamil voice model
-PIPER_MODEL = PROJECT_ROOT / "models" / "ta_IN-rasa_female-medium.onnx"
+logger = logging.getLogger(__name__)
 
 
 def create_tamil_audio(text, audio_file):
     """
     Generate Tamil speech using Piper TTS.
     """
+    try:
+        output_path = Path(audio_file)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    output_path = Path(audio_file)
+        logger.info("Generating Tamil speech...")
 
-    # Create output directory if it doesn't exist
-    output_path.parent.mkdir(parents=True, exist_ok=True)
+        subprocess.run(
+            [
+                str(PIPER_EXE),
+                "--model",
+                str(PIPER_MODEL),
+                "--output_file",
+                str(output_path),
+            ],
+            input=text,
+            text=True,
+            encoding="utf-8",
+            check=True,
+        )
 
-    subprocess.run(
-        [
-            str(PIPER_EXE),
-            "--model",
-            str(PIPER_MODEL),
-            "--output_file",
-            str(output_path),
-        ],
-        input=text,
-        text=True,
-        encoding="utf-8",
-        check=True,
-    )
+        logger.info(f"Audio saved to: {output_path}")
+
+    except Exception:
+        logger.exception("Piper TTS generation failed.")
+        raise

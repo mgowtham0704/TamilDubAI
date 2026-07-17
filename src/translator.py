@@ -1,10 +1,24 @@
+import logging
+
 from deep_translator import GoogleTranslator
+
+logger = logging.getLogger(__name__)
 
 
 def translate_to_tamil(text):
-    tamil = GoogleTranslator(
-        source="auto",
-        target="ta"
-    ).translate(text)
+    """
+    Translate text to Tamil.
+    """
+    try:
+        logger.info("Translating text to Tamil...")
 
-    return tamil
+        tamil = GoogleTranslator(
+            source="auto",
+            target="ta"
+        ).translate(text)
+
+        return tamil
+
+    except Exception:
+        logger.exception("Translation failed.")
+        raise
