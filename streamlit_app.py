@@ -14,6 +14,7 @@ st.set_page_config(
 # -----------------------------
 st.title("🎬 TamilDubAI")
 st.subheader("AI-Powered Video Dubbing")
+st.sidebar.write(f"TamilDubAI v{APP_VERSION}")
 
 st.divider()
 

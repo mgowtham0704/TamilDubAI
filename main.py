@@ -15,7 +15,7 @@ from src.audio_timeline import create_timeline_audio
 from src.merge import merge_video
 from src.extract_audio import extract_audio
 
-
+APP_VERSION = "1.0.0"
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s"
