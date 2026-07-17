@@ -17,8 +17,11 @@ PIPER_DIR = BASE_DIR / "piper"
 # Whisper model
 WHISPER_MODEL = "base"
 
+# Piper executable
+PIPER_EXE = PIPER_DIR / "piper.exe"
+
 # Piper voice model
-PIPER_MODEL = PIPER_DIR / "ta_IN-rasa-female-medium.onnx"
+PIPER_MODEL = MODELS_DIR / "ta_IN-rasa_female-medium.onnx"
 
 # FFmpeg executable
 FFMPEG = "ffmpeg"
