@@ -1,30 +1,57 @@
-# Virtual environments
+# ===========================
+# Virtual Environments
+# ===========================
 .venv/
+venv/
 tts_env/
 
+# ===========================
 # Python
+# ===========================
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
-# Generated media
+# ===========================
+# Environment Variables
+# ===========================
+.env
+.env.*
+
+# ===========================
+# Generated Media
+# ===========================
 media/temp/
 media/output/
 output/
 
-# Audio & video
+# Audio & Video
 *.wav
 *.mp3
 *.mp4
 
-# AI models
+# Subtitle files
+*.srt
+
+# Logs
+*.log
+
+# ===========================
+# AI Models
+# ===========================
 models/
 
 # Piper binaries
 piper/
 
-# VS Code
+# ===========================
+# IDE
+# ===========================
 .vscode/
+.idea/
 
-# OS files
+# ===========================
+# OS Files
+# ===========================
 .DS_Store
 Thumbs.db
