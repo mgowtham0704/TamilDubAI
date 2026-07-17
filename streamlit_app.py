@@ -13,8 +13,8 @@ st.set_page_config(
 # Title
 # -----------------------------
 st.title("🎬 TamilDubAI")
+st.sidebar.write("TamilDubAI v{APP_VERSION}")
 st.subheader("AI-Powered Video Dubbing")
-st.sidebar.write(f"TamilDubAI v{APP_VERSION}")
 
 st.divider()
 
@@ -77,6 +77,7 @@ status.info("Waiting for video upload...")
 # -----------------------------
 from pathlib import Path
 from main import dub_video
+from main import APP_VERSION
 from config import INPUT_DIR
 
 if dub_button:
