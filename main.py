@@ -21,7 +21,6 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(message)s"
 )
 
-
 def dub_video(input_video_path, progress_callback=None):
 
     """
