@@ -89,25 +89,28 @@ if dub_button:
 
         with open(input_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
+            status.info("🚀 Starting TamilDubAI...")
 
-        status.info("🚀 Starting TamilDubAI...")
-
-        progress_bar.progress(10)
         def progress_update(message, value):
             status.info(message)
             progress_bar.progress(value)
-            output_video = dub_video
-            (str(input_path),
-             progress_callback=progress_update
-)
 
-        progress_bar.progress(100)
+        output_video = dub_video(
+            str(input_path),
+            progress_callback=progress_update
+        )
 
         status.success("✅ Dubbing completed!")
 
         st.video(output_video)
 
         with open(output_video, "rb") as file:
+            st.download_button(
+                "📥 Download Dubbed Video",
+                file=file,
+                file_name="tamil_dubbed.mp4",
+                mime="video/mp4",
+            )
             st.download_button(
                 "📥 Download Dubbed Video",
                 file,
