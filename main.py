@@ -97,7 +97,7 @@ def main():
 
     try:
 
-        logging.info("Starting TamilDubAI...")
+        logging.info(f"Starting TamilDubAI v1.0.0...")
 
         video = INPUT_DIR / "video.mp4"
 
