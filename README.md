@@ -98,7 +98,10 @@ screenshots/
 
 Example:
 
-![TamilDubAI Home](screenshots/home.png)
+![TamilDubAI Home](c:\Users\len\Downloads\homepage_tamilDubAI.jpeg)
+![TamilDubAI process](c:\Users\len\Downloads\processing.jpeg)
+![TamilDubAI process](c:\Users\len\Downloads\result.jpeg)
+
 
 ---
 
