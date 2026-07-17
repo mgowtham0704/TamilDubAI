@@ -93,8 +93,13 @@ if dub_button:
         status.info("🚀 Starting TamilDubAI...")
 
         progress_bar.progress(10)
-
-        output_video = dub_video(str(input_path))
+        def progress_update(message, value):
+            status.info(message)
+            progress_bar.progress(value)
+            output_video = dub_video
+            (str(input_path),
+             progress_callback=progress_update
+)
 
         progress_bar.progress(100)
 
