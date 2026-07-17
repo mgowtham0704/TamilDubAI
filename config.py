@@ -1,21 +1,24 @@
 from pathlib import Path
-from config import INPUT_DIR, OUTPUT_DIR, PIPER_MODEL
 
 # Base project directory
 BASE_DIR = Path(__file__).resolve().parent
 
-# Folders
-INPUT_DIR = BASE_DIR / "input"
-OUTPUT_DIR = BASE_DIR / "output"
+# Media folders
 MEDIA_DIR = BASE_DIR / "media"
+
+INPUT_DIR = MEDIA_DIR / "input"
+OUTPUT_DIR = MEDIA_DIR / "output"
+TEMP_DIR = MEDIA_DIR / "temp"
+
+# Models
 MODELS_DIR = BASE_DIR / "models"
 PIPER_DIR = BASE_DIR / "piper"
 
-# Models
+# Whisper model
 WHISPER_MODEL = "base"
 
-# Piper voice model (update the filename if yours differs)
+# Piper voice model
 PIPER_MODEL = PIPER_DIR / "ta_IN-rasa-female-medium.onnx"
 
-# FFmpeg executable (if needed)
+# FFmpeg executable
 FFMPEG = "ffmpeg"
