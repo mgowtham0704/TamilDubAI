@@ -1,4 +1,5 @@
 import logging
+import shutil
 
 from config import (
     INPUT_DIR,
@@ -19,44 +20,68 @@ logging.basicConfig(
 )
 
 
+def dub_video(input_video_path):
+    """
+    Runs the complete TamilDubAI pipeline.
+    Returns the path to the dubbed video.
+    """
+
+    audio_path = TEMP_DIR / "audio.wav"
+    final_audio = TEMP_DIR / "final_tamil_audio.mp3"
+    input_video = INPUT_DIR / "video.mp4"
+    output_video = OUTPUT_DIR / "tamil_dubbed_final.mp4"
+
+    # Save uploaded video into INPUT_DIR
+    shutil.copy(input_video_path, input_video)
+
+    logging.info("Transcribing audio...")
+    segments = transcribe_audio(str(audio_path))
+
+    logging.info("Generating Tamil speech...")
+
+    for i, segment in enumerate(segments):
+
+        tamil = translate_to_tamil(segment["text"])
+
+        create_tamil_audio(
+            tamil,
+            audio_file=str(OUTPUT_DIR / f"segment_{i}.wav")
+        )
+
+    logging.info("Creating timeline audio...")
+
+    create_timeline_audio(
+        segments,
+        str(final_audio)
+    )
+
+    logging.info("Merging video...")
+
+    merge_video(
+        str(input_video),
+        str(final_audio),
+        str(output_video)
+    )
+
+    return str(output_video)
+
+
 def main():
+
     try:
+
         logging.info("Starting TamilDubAI...")
-        audio_path = TEMP_DIR / "audio.wav"
-        final_audio = TEMP_DIR / "final_tamil_audio.mp3"
-        input_video = INPUT_DIR / "video.mp4"
-        output_video = OUTPUT_DIR / "tamil_dubbed_final.mp4"
 
-        logging.info("Transcribing audio...")
-        segments = transcribe_audio(str(audio_path))
+        video = INPUT_DIR / "video.mp4"
 
-        logging.info("Generating Tamil speech...")
-        for i, segment in enumerate(segments):
-            tamil = translate_to_tamil(segment["text"])
+        output = dub_video(str(video))
 
-            create_tamil_audio(
-                tamil,
-                audio_file=str(OUTPUT_DIR / f"segment_{i}.wav")
-            )
-
-        logging.info("Creating timeline audio...")
-        create_timeline_audio(
-            segments,
-            str(final_audio)
-        )
-
-        logging.info("Merging video...")
-        merge_video(
-            str(input_video),
-            str(final_audio),
-            str(output_video)
-        )
-
-        logging.info("✅ TamilDubAI completed successfully!")
+        logging.info(f"Completed: {output}")
 
     except Exception as e:
-        logging.exception(f"Pipeline failed: {e}")
+
+        logging.exception(e)
 
 
 if __name__ == "__main__":
-    main()  
+    main()
