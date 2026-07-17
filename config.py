@@ -21,7 +21,18 @@ WHISPER_MODEL = "base"
 PIPER_EXE = PIPER_DIR / "piper.exe"
 
 # Piper voice model
-PIPER_MODEL = MODELS_DIR / "ta_IN-rasa_female-medium.onnx"
+from pathlib import Path
+
+PIPER_FEMALE_MODEL = Path(
+    "models/ta_IN-rasa_female-medium.onnx"
+)
+
+PIPER_MALE_MODEL = Path(
+    "models/ta_IN-Valluvar-medium.onnx"
+)
+
+# Default voice
+PIPER_MODEL = PIPER_FEMALE_MODEL
 
 # FFmpeg executable
 FFMPEG = "ffmpeg"

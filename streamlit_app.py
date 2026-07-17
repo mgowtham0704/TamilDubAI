@@ -96,8 +96,9 @@ if dub_button:
 
         output_video = dub_video(
             str(input_path),
-            progress_callback=progress_update
-        )
+            progress_callback=progress_update,
+            voice=voice
+)
 
         status.success("✅ Dubbing completed!")
 

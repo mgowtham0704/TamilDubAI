@@ -21,8 +21,11 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(message)s"
 )
 
-def dub_video(input_video_path, progress_callback=None):
-
+def dub_video(
+    input_video_path,
+    progress_callback=None,
+    voice="Female"
+):
     """
     Runs the complete TamilDubAI pipeline.
     Returns the path to the dubbed video.
@@ -64,9 +67,9 @@ def dub_video(input_video_path, progress_callback=None):
 
         create_tamil_audio(
             tamil,
-            audio_file=str(OUTPUT_DIR / f"segment_{i}.wav")
-        )
-
+            audio_file=str(OUTPUT_DIR / f"segment_{i}.wav"),
+            voice=voice
+)
     logging.info("Creating timeline audio...")
 
     update("🧩 Building timeline audio...", 75)
