@@ -74,10 +74,38 @@ status.info("Waiting for video upload...")
 # -----------------------------
 # Placeholder Logic
 # -----------------------------
+from pathlib import Path
+from main import dub_video
+from config import INPUT_DIR
+
 if dub_button:
 
     if uploaded_file is None:
         st.error("Please upload a video first.")
 
     else:
-        st.success("UI is ready! Processing pipeline will be connected next.")
+
+        input_path = INPUT_DIR / uploaded_file.name
+
+        with open(input_path, "wb") as f:
+            f.write(uploaded_file.getbuffer())
+
+        status.info("🚀 Starting TamilDubAI...")
+
+        progress_bar.progress(10)
+
+        output_video = dub_video(str(input_path))
+
+        progress_bar.progress(100)
+
+        status.success("✅ Dubbing completed!")
+
+        st.video(output_video)
+
+        with open(output_video, "rb") as file:
+            st.download_button(
+                "📥 Download Dubbed Video",
+                file,
+                file_name="tamil_dubbed.mp4",
+                mime="video/mp4",
+            )

@@ -33,7 +33,12 @@ def dub_video(input_video_path):
     output_video = OUTPUT_DIR / "tamil_dubbed_final.mp4"
 
     # Save uploaded video into INPUT_DIR
-    shutil.copy(input_video_path, input_video)
+    from pathlib import Path
+
+source = Path(input_video_path)
+
+if source.resolve() != input_video.resolve():
+    shutil.copy(source, input_video)
 
     logging.info("Transcribing audio...")
     extract_audio(
