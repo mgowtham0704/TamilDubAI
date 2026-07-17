@@ -86,21 +86,9 @@ Tamil Dubbed Video
 
 # 📸 Screenshots
 
-Add your screenshots here:
-
-```
-screenshots/
-│
-├── home.png
-├── processing.png
-└── result.png
-```
-
-Example:
-
-![TamilDubAI Home](c:\Users\len\Downloads\homepage_tamilDubAI.jpeg)
-![TamilDubAI process](c:\Users\len\Downloads\processing.jpeg)
-![TamilDubAI process](c:\Users\len\Downloads\result.jpeg)
+![TamilDubAI Home](screenshots/home.jpeg)
+![TamilDubAI process](screenshots/processing.jpeg)
+![TamilDubAI result](screenshots/result.jpeg)
 
 
 ---
