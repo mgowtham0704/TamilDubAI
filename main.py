@@ -6,8 +6,9 @@ from config import (
     INPUT_DIR,
     OUTPUT_DIR,
     TEMP_DIR,
-)
-
+    SEPARATED_DIR,
+    )
+from src.audio_separator import separate_audio
 from src.speech_to_text import transcribe_audio
 from src.translator import translate_to_tamil
 from src.text_to_speech import create_tamil_audio
@@ -54,14 +55,19 @@ def dub_video(
         str(input_video),
         str(audio_path)
     )
-
+    logging.info("Separating vocals and background music...")
+    update("🎵 Separating vocals...", 20)
+    separated_folder = separate_audio(
+        str(audio_path),
+        str(SEPARATED_DIR)
+        )
+    vocals_path = separated_folder / "vocals.wav"
+    background_path = separated_folder / "no_vocals.wav"
     logging.info("Transcribing audio...")
     update("🎙️ Transcribing speech...", 30)
     segments = transcribe_audio(str(audio_path))
     logging.info("Generating Tamil speech...")
     update("🌍 Translating to Tamil...", 50)
-
-    
     for i, segment in enumerate(segments):
 
         tamil = translate_to_tamil(segment["text"])

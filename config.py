@@ -7,6 +7,8 @@ MEDIA_DIR = BASE_DIR / "media"
 INPUT_DIR = MEDIA_DIR / "input"
 OUTPUT_DIR = MEDIA_DIR / "output"
 TEMP_DIR = MEDIA_DIR / "temp"
+# AI Audio Separation
+SEPARATED_DIR = MEDIA_DIR / "separated"
 
 MODELS_DIR = BASE_DIR / "models"
 PIPER_DIR = BASE_DIR / "piper"
