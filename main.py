@@ -1,5 +1,6 @@
 import logging
 import shutil
+from pathlib import Path
 
 from config import (
     INPUT_DIR,
@@ -32,21 +33,21 @@ def dub_video(input_video_path):
     input_video = INPUT_DIR / "video.mp4"
     output_video = OUTPUT_DIR / "tamil_dubbed_final.mp4"
 
-    # Save uploaded video into INPUT_DIR
-    from pathlib import Path
+       # Save uploaded video into INPUT_DIR
 
-source = Path(input_video_path)
+    source = Path(input_video_path)
 
-if source.resolve() != input_video.resolve():
-    shutil.copy(source, input_video)
+    if source.resolve() != input_video.resolve():
+        shutil.copy(source, input_video)
+
+    logging.info("Extracting audio...")
+    extract_audio(
+        str(input_video),
+        str(audio_path)
+    )
 
     logging.info("Transcribing audio...")
-    extract_audio(
-    str(input_video),
-    str(audio_path)
-)
     segments = transcribe_audio(str(audio_path))
-
     logging.info("Generating Tamil speech...")
 
     for i, segment in enumerate(segments):
