@@ -22,11 +22,15 @@ logging.basicConfig(
 )
 
 
-def dub_video(input_video_path):
+def dub_video(input_video_path, progress_callback=None):
+
     """
     Runs the complete TamilDubAI pipeline.
     Returns the path to the dubbed video.
     """
+    def update(message, progress):
+        if progress_callback:
+            progress_callback(message, progress)
 
     audio_path = TEMP_DIR / "audio.wav"
     final_audio = TEMP_DIR / "final_tamil_audio.mp3"
@@ -39,17 +43,22 @@ def dub_video(input_video_path):
 
     if source.resolve() != input_video.resolve():
         shutil.copy(source, input_video)
+        update("📁 Preparing video...", 5)
 
     logging.info("Extracting audio...")
+    update("🎵 Extracting audio...", 15)
     extract_audio(
         str(input_video),
         str(audio_path)
     )
 
     logging.info("Transcribing audio...")
+    update("🎙️ Transcribing speech...", 30)
     segments = transcribe_audio(str(audio_path))
     logging.info("Generating Tamil speech...")
+    update("🌍 Translating to Tamil...", 50)
 
+    
     for i, segment in enumerate(segments):
 
         tamil = translate_to_tamil(segment["text"])
@@ -61,18 +70,22 @@ def dub_video(input_video_path):
 
     logging.info("Creating timeline audio...")
 
+    update("🧩 Building timeline audio...", 75)
+
     create_timeline_audio(
         segments,
         str(final_audio)
     )
 
     logging.info("Merging video...")
+    update("🎬 Merging video...", 90)
 
     merge_video(
         str(input_video),
         str(final_audio),
         str(output_video)
     )
+    update("✅ Completed!", 100)
 
     return str(output_video)
 
